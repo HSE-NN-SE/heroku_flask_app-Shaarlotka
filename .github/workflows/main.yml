@@ -22,7 +22,7 @@ jobs:
      - name: Initial
        run: pip install flake8
      - name: CodeStyle
-       run: python -m flake8 ./ --ignore=F401,E402
+       run: python -m flake8 ./ --ignore=F401,#E402
      
   Tests:
     runs-on: ubuntu-latest
