@@ -34,3 +34,26 @@ jobs:
         pip install -e '.[test]'
         python -m coverage run -m pytest
         python -m coverage report
+        
+  Telegram:
+    runs-on: ubuntu-latest
+    needs: Tests
+    if: falure()
+    steps:
+      - name: Notif
+        uses: appleboy/telegram-action@master
+        with:
+          to: 943063539
+          token: 1776221595:AAEfjTL8R8i90bAVUGc9jcA9q4mX-Pp-9ss
+          message: oops
+          
+
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: akhileshns/heroku-deploy@v3.12.12
+      with:
+        heroku-api-key: ${{secret.API_KEY}}
+        heroku-app-name: kokoko2
+        heroku-email: ${{secret.EMAIL_NAME}}
